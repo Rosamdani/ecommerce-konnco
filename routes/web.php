@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CheckoutController;
 use App\Http\Middleware\UserAuthMiddleware;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
@@ -8,6 +9,7 @@ use App\Livewire\HomePage;
 use App\Livewire\KeranjangPage;
 use App\Livewire\OrderDetail;
 use App\Livewire\OrderHistoryPage;
+use App\Livewire\Payment;
 use App\Livewire\ProdukDetailPage;
 use App\Livewire\ProdukPage;
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +33,7 @@ Route::middleware('auth')->get('/user/logout', function () {
 });
 Route::middleware([UserAuthMiddleware::class])->group(function () {
     Route::get('/checkout', CheckoutPage::class)->name('checkout');
+    Route::get('/payment', [CheckoutController::class, 'index'])->name('payment');
     Route::get('/order/riwayat', OrderHistoryPage::class)->name('order.riwayat');
     Route::get('/order/detail', OrderDetail::class)->name('order.detail');
 });

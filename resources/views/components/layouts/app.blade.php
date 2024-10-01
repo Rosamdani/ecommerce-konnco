@@ -39,9 +39,17 @@
             position: relative;
             z-index: 2;
         }
+
+        #snap-midtrans {
+            position: relative;
+            /* Pastikan ini diatur jika belum */
+            z-index: 9999;
+            /* Atau angka yang cukup tinggi */
+        }
     </style>
     </style>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
 </head>
 
 <body>
@@ -52,7 +60,6 @@
         @livewire('search-bar')
     </main>
     @livewireScripts
-    <script src="{{ asset('js/profile-toggle.js')}}"></script>
 </body>
 
 </html>

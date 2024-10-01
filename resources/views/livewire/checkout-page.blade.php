@@ -1,9 +1,9 @@
 <div class="bg-gray-50">
-    <main class="mx-auto max-w-7xl px-4 pb-24 pt-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl px-4 pb-24 pt-16 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-2xl lg:max-w-none">
             <h1 class="sr-only">Checkout</h1>
 
-            <form wire:submit.prevent='save' class="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
+            <form wire:submit.prevent="save" class="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
                 <div>
                     <div>
                         <h2 class="text-lg font-medium text-gray-900">Informasi pembeli</h2>
@@ -13,7 +13,7 @@
                             </label>
                             <div class="mt-1">
                                 <input type="email" id="email" wire:model="email" autocomplete="email"
-                                    value="{{auth()->user()->email}}"
+                                    value="{{$email}}" value="{{auth()->user()->email}}"
                                     class="block {{ $errors->has('email') ? 'border border-red-500' : 'border-0'}} w-full py-2 border px-3 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                             </div>
                             @error('email')
@@ -31,7 +31,7 @@
                                     pembeli</label>
                                 <div class="mt-1">
                                     <input type="text" id="first-name" wire:model="nama" autocomplete="given-name"
-                                        value="{{auth()->user()->name}}"
+                                        value="{{$nama}}" value="{{auth()->user()->name}}"
                                         class="block {{ $errors->has('nama') ? 'border border-red-500' : 'border-0'}} w-full py-2 border px-3 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                 </div>
                                 @error('nama')
@@ -45,6 +45,7 @@
                                 <label for="address" class="block text-sm font-medium text-gray-700">Alamat</label>
                                 <div class="mt-1">
                                     <input type="text" wire:model="alamat" id="address" autocomplete="street-address"
+                                        value="{{$alamat}}"
                                         class="block {{ $errors->has('alamat') ? 'border border-red-500' : 'border-0'}} w-full py-2 border px-3 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                 </div>
                                 @error('alamat')
@@ -53,10 +54,11 @@
                             </div>
 
                             <div class="sm:col-span-2">
-                                <label for="apartment" class="block text-sm font-medium text-gray-700">Apartemen, suite,
+                                <label for="apartment" class="block text-sm font-medium text-gray-700">Apartemen,
+                                    suite,
                                     etc.</label>
                                 <div class="mt-1">
-                                    <input type="text" wire:model="apartment" id="apartment"
+                                    <input type="text" wire:model="apartment" id="apartment" value="{{$apartment}}"
                                         class="block {{ $errors->has('apartment') ? 'border border-red-500' : 'border-0'}} w-full py-2 border px-3 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                 </div>
                                 @error('apartment')
@@ -68,6 +70,7 @@
                                 <label for="kota" class="block text-sm font-medium text-gray-700">Kota</label>
                                 <div class="mt-1">
                                     <input type="text" wire:model="kota" id="kota" autocomplete="address-level2"
+                                        value="{{$kota}}"
                                         class="block {{ $errors->has('kota') ? 'border border-red-500' : 'border-0'}} w-full py-2 border px-3 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                 </div>
                                 @error('kota')
@@ -81,6 +84,7 @@
                                     Provinsi</label>
                                 <div class="mt-1">
                                     <input type="text" wire:model="provinsi" id="provinsi" autocomplete="address-level1"
+                                        value="{{$provinsi}}"
                                         class="block {{ $errors->has('provinsi') ? 'border border-red-500' : 'border-0'}} w-full py-2 border px-3 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                 </div>
                                 @error('provinsi')
@@ -93,6 +97,7 @@
                                     pos</label>
                                 <div class="mt-1">
                                     <input type="text" wire:model="postal" id="postal" autocomplete="postal"
+                                        value="{{$postal}}"
                                         class="block {{ $errors->has('postal') ? 'border border-red-500' : 'border-0'}} w-full py-2 border px-3 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                 </div>
                                 @error('postal')
@@ -101,15 +106,18 @@
                             </div>
 
                             <div class="sm:col-span-2">
-                                <label for="phone" class="block text-sm font-medium text-gray-700">Nomor telpon</label>
+                                <label for="phone" class="block text-sm font-medium text-gray-700">Nomor
+                                    telpon</label>
                                 <div class="mt-1">
                                     <input type="text" wire:model="phone" id="phone" autocomplete="tel"
+                                        value="{{$phone}}"
                                         class="block {{ $errors->has('phone') ? 'border border-red-500' : 'border-0'}} w-full py-2 border px-3 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                 </div>
                                 @error('phone')
                                 <div class="text-xs text-red-500">{{ $message }}</div>
                                 @enderror
                             </div>
+
                         </div>
                     </div>
 
@@ -189,13 +197,12 @@
 
                         <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
                             <button type="submit"
-                                class="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"><span
-                                    wire:loading.remove wire:target='save'>Bayar sekarang</span><span wire:loading
-                                    wire:target='save'>Memproses pembayaran...</span></button>
+                                class="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"><span>Bayar
+                                    sekarang</span></button>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
-    </main>
+    </div>
 </div>
