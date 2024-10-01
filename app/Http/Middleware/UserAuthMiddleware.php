@@ -16,7 +16,7 @@ class UserAuthMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::check() || Auth::user()->hasRole('user')) {
+        if (!Auth::check() || !Auth::user()->hasRole('user')) {
             return redirect()->route('login');
         }
         return $next($request);
