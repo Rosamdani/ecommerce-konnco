@@ -16,10 +16,31 @@
 <body>
     <div class="w-full h-screen">
         <div id="snap-container" class="mx-auto max-w-2xl"></div>
+        <button id="pay-button">Bayar</button>
     </div>
 
     <script type="text/javascript">
         // For example trigger on button clicked, or any time you need
+        window.snap.pay('{{$snapToken}}', {
+        onSuccess: function (result) {
+          /* You may add your own implementation here */
+        //   Redirect to home
+          alert("payment success!"); console.log(result);
+          window.location.href = "{{route('payment.success')}}";
+        },
+        onPending: function (result) {
+          /* You may add your own implementation here */
+          alert("wating your payment!"); console.log(result);
+        },
+        onError: function (result) {
+          window.location.href = "{{route('payment.failed')}}";
+          },
+        onClose: function () {
+          window.location.href = "{{route('payment.cancel')}}";
+        }
+      });
+    // trigger on click pay-button
+    document.getElementById('pay-button').onclick = function () {
         window.snap.pay('{{$snapToken}}', {
         onSuccess: function (result) {
           /* You may add your own implementation here */
@@ -30,14 +51,14 @@
           alert("wating your payment!"); console.log(result);
         },
         onError: function (result) {
-          /* You may add your own implementation here */
-          alert("payment failed!"); console.log(result);
-        },
+          window.location.href = "{{route('payment.failed')}}";
+          },
         onClose: function () {
-          /* You may add your own implementation here */
-          alert('you closed the popup without finishing the payment');
+          window.location.href = "{{route('payment.cancel')}}";
         }
       });
+    };
+
     </script>
 
 

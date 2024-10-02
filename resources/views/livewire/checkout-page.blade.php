@@ -130,8 +130,9 @@
                     <div class="mt-4 rounded-lg border border-gray-200 bg-white shadow-sm">
                         <h3 class="sr-only">Item dalam keranjang</h3>
                         <ul role="list" class="divide-y divide-gray-200">
-                            @forelse ($my_cart as $cart)
+                            @forelse ($my_cart as $key => $cart)
                             <li class="flex px-4 py-6 sm:px-6">
+
                                 <div class="flex-shrink-0">
                                     <img src="{{asset('storage/'.$cart['images'])}}" alt="{{$cart['nama']}}"
                                         class="w-20 rounded-md">
@@ -144,6 +145,11 @@
                                                 <a href="/produk/{{$cart['id']}}"
                                                     class="font-medium text-gray-700 hover:text-gray-800">{{$cart['nama']}}</a>
                                             </h4>
+                                            @if($errors->has('my_cart.' . $key . '.quantity'))
+                                            <div class="text-sm text-red-500">
+                                                {{ $errors->first('my_cart.' . $key . '.quantity') }}
+                                            </div>
+                                            @endif
                                         </div>
 
                                         <div class="ml-4 flow-root flex-shrink-0">
@@ -197,9 +203,16 @@
 
                         <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
                             <button type="submit"
-                                class="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"><span>Bayar
-                                    sekarang</span></button>
+                                class="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"><span
+                                    wire:loading.remove wire:target='save'>Bayar
+                                    sekarang</span><span wire:loading wire:target='save'>Membuka menu
+                                    pembayaran...</span></span></button>
                         </div>
+                        @if($errors->has('my_cart'))
+                        <div class="flex px-3 text-center py-4 text-sm text-red-500">
+                            {{ $errors->first('my_cart') }}
+                        </div>
+                        @endif
                     </div>
                 </div>
             </form>
