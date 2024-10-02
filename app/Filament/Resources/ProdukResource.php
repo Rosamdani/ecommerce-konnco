@@ -40,7 +40,7 @@ class ProdukResource extends Resource
                     TextInput::make('harga')
                         ->numeric()
                         ->required(),
-                    Checkbox::make('status')
+                    Toggle::make('status')
                         ->label('Aktif?')
                         ->default(true)
                         ->required()
@@ -63,7 +63,14 @@ class ProdukResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\ImageColumn::make('images'),
+                Tables\Columns\TextColumn::make('nama'),
+                Tables\Columns\TextColumn::make('stok'),
+                Tables\Columns\TextColumn::make('harga')
+                    ->money('IDR'),
+                Tables\Columns\TextColumn::make('deskripsi')
+                    ->limit(30),
+                Tables\Columns\IconColumn::make('status')->boolean(),
             ])
             ->filters([
                 //

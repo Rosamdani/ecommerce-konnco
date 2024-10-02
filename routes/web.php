@@ -7,6 +7,7 @@ use App\Livewire\Auth\Register;
 use App\Livewire\CheckoutPage;
 use App\Livewire\HomePage;
 use App\Livewire\KeranjangPage;
+use App\Livewire\OrderCancel;
 use App\Livewire\OrderDetail;
 use App\Livewire\OrderHistoryPage;
 use App\Livewire\Payment;
@@ -33,7 +34,9 @@ Route::middleware('auth')->get('/user/logout', function () {
 });
 Route::middleware([UserAuthMiddleware::class])->group(function () {
     Route::get('/checkout', CheckoutPage::class)->name('checkout');
+    Route::get('/payment/cancel', OrderCancel::class)->name('payment.cancel');
+    Route::get('/payment/failed', [CheckoutController::class, 'failed'])->name('payment.failed');
     Route::get('/payment', [CheckoutController::class, 'index'])->name('payment');
     Route::get('/order/riwayat', OrderHistoryPage::class)->name('order.riwayat');
-    Route::get('/order/detail', OrderDetail::class)->name('order.detail');
+    Route::get('/order/detail', OrderDetail::class)->name('payment.success');
 });
