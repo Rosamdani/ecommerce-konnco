@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\SocialiteController;
 use App\Http\Middleware\UserAuthMiddleware;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
@@ -25,7 +26,9 @@ Route::get('/keranjang', KeranjangPage::class)->name('keranjang');
 Route::middleware('guest')->group(function () {
     Route::get('/login', Login::class)->name('login');
     Route::get('/register', Register::class)->name('register');
+    Route::get('/auth/redirect', [SocialiteController::class, 'redirect'])->name('auth.google.redirect');
 });
+Route::get('/callback', [SocialiteController::class, 'callback'])->name('auth.google.callback');
 
 Route::middleware('auth')->get('/user/logout', function () {
     Auth::logout();

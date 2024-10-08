@@ -58,7 +58,7 @@
                 <p class="text-slate-500">Atau</p>
                 <hr class="w-full bg-gray-400">
             </div>
-            <button aria-label="Lanjutkan dengan google" role="button"
+            <a href="/auth/redirect" aria-label="Lanjutkan dengan google" role="button"
                 class="focus:outline-none hover:bg-gray-50 shadow focus:ring-2 focus:ring-offset-1 focus:ring-gray-500 py-3.5 px-4 border rounded-lg border-gray-500 flex items-center w-full ">
                 <svg width="19" height="20" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -75,7 +75,7 @@
                         fill="#EB4335" />
                 </svg>
                 <p class="text-base font-medium ml-4 text-gray-500">Lanjutkan dengan Google</p>
-            </button>
+            </a>
             <button aria-label="Lanjutkan dengan github" role="button"
                 class="focus:outline-none hover:bg-gray-50 shadow  focus:ring-2 focus:ring-offset-1 focus:ring-gray-500 py-3.5 px-4 border rounded-lg border-gray-500 flex items-center w-full mt-4">
                 <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
